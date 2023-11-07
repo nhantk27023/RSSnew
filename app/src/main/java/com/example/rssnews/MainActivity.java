@@ -23,17 +23,20 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    NewsAdapter adapter;
+    ArrayList<News> list;
     ListView lvNews;
-    ArrayList<String> arrayTitle, arrayLink;
-    ArrayAdapter adapter;
+  ArrayList<String>  arrayLink;
+   // ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lvNews = (ListView) findViewById(R.id.dsnews);
-        arrayTitle = new ArrayList<>();
+        list = new ArrayList<>();
+        //arrayTitle = new ArrayList<>();
         arrayLink = new ArrayList<>();
-         adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1,arrayTitle);
+         adapter = new NewsAdapter(list,MainActivity.this,R.layout.news_line);
 
         lvNews.setAdapter(adapter);
         new ReadRSS().execute("https://vnexpress.net/rss/so-hoa.rss");
@@ -80,14 +83,24 @@ public class MainActivity extends AppCompatActivity {
             NodeList nodeList = document.getElementsByTagName("item");
 
             String tieuDe="";
+            String link="";
+            String desc="";
+            String imageLink="";
+            String htmlDesc="";
 
             for(int i=0;i<nodeList.getLength();i++){
                 Element element = (Element) nodeList.item(i);
                 tieuDe = parser.getValue(element,"title");
+                link = parser.getValue(element,"link");
+                htmlDesc = parser.getValueDesc(element,"description");
+                imageLink = parser.getImageLink(htmlDesc);
+                desc = parser.getDescContent(htmlDesc);
 
-               arrayTitle.add(tieuDe);
+                News news = new News(tieuDe,desc,link,imageLink);
+                list.add(news);
+               //arrayTitle.add(tieuDe);
 
-                arrayLink.add(parser.getValue(element,"link"));
+                arrayLink.add(link);
             }
 
             adapter.notifyDataSetChanged();

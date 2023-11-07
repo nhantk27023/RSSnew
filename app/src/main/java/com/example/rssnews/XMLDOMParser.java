@@ -1,5 +1,8 @@
 package com.example.rssnews;
 import android.util.Log;
+
+import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -37,6 +40,27 @@ public class XMLDOMParser {
     public String getValue(Element item, String name) {
         NodeList nodes = item.getElementsByTagName(name);
         return this.getTextNodeValue(nodes.item(0));
+    }
+    public String getValueDesc(Element item, String name)
+    {
+        String desc =
+                item.getElementsByTagName(name).item(0).getTextContent();
+        return desc;
+    }
+    public String getImageLink(String htmlContent)
+    {
+// Parse the html description to get the image url
+        String html = htmlContent;
+        org.jsoup.nodes.Document docHtml = Jsoup.parse(html);
+        Elements imgEle = docHtml.select("img");
+        return imgEle.attr("src");
+    }
+    public String getDescContent(String htmlContent)
+    {
+// Parse the html description to get the image url
+        String html = htmlContent;
+        org.jsoup.nodes.Document docHtml = Jsoup.parse(html);
+        return docHtml.text();
     }
 
     private final String getTextNodeValue(Node elem) {
