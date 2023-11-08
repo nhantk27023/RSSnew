@@ -9,21 +9,26 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="#EEDCC6">
+        android:background="#BF3765">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NEWS"
-            android:textSize="30sp"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:text="Tin Tức"
+            android:fontFamily="@font/svnrooker"
+            android:textColor="@color/black"
+            android:textFontWeight="700"
+            android:textSize="30sp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bellken"
+            android:layout_width="31dp"
+            android:layout_height="36dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="19dp"
+            android:layout_marginBottom="17dp"
+            android:src="@drawable/bell" />
     </RelativeLayout>
 
     <ListView
@@ -45,7 +50,8 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EEDCC6">
+        android:padding="10dp"
+        android:background="#BF3765">
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -60,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:src="@drawable/heart"
+            android:src="@drawable/book"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <ImageButton
@@ -69,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:src="@drawable/cartken"
+            android:src="@drawable/cart"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <ImageButton
